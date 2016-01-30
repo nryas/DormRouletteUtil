@@ -24,4 +24,4 @@ app.post "/", (req, res) ->
       data = buf.toString("base64")
       io.sockets.emit "push_image", {dataUrl: util.format("data:%s;base64,%s", mime.lookup(path), data)}
       res.end()
-server.listen(8080)
+server.listen(PORT, HOST)
