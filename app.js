@@ -50,6 +50,6 @@
     });
   });
 
-  server.listen(PORT, HOST);
+  server.listen(process.env.PORT);
 
 }).call(this);
