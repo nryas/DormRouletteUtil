@@ -2,7 +2,7 @@
 (function() {
   var socket;
 
-  socket = io.connect('http://localhost:8080');
+  socket = io.connect(location.href);
 
   socket.on("push_image", function(data) {
     $('<img style="display: block;">').attr('src', data.dataUrl).prependTo($("body"));
