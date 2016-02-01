@@ -5,8 +5,8 @@
   socket = io.connect(location.href);
 
   socket.on("push_image", function(data) {
-    $('img').fadeOut();
-    $('<img style="display: block;">').attr('src', data.dataUrl).fadeIn();
+    $('img').remove();
+    $('<img style="display: block;">').attr('src', data.dataUrl).prependTo($("body")).fadeIn();
   });
 
 }).call(this);
