@@ -32,24 +32,12 @@
     var form;
     form = new multiparty.Form();
     return form.parse(req, function(err, fieldsObject, filesObject, fieldsList, filesList) {
-      var img, path;
-      img = filesObject;
-      path = img['uploaded'][0].path;
-      return fs.readFile(path, function(err, buf) {
-        var data;
-        if (err != null) {
-          res.status(422);
-          return;
-        }
-        data = buf.toString("base64");
-        io.sockets.emit("push_image", {
-          dataUrl: util.format("data:%s;base64,%s", mime.lookup(path), data)
-        });
-        return res.end();
-      });
+      var name;
+      name = fieldsObject;
+      return io.sockets.emit("update", name[0]);
     });
   });
 
-  server.listen(3000);
+  server.listen(process.env.PORT);
 
 }).call(this);

@@ -4,7 +4,7 @@
 
   socket = io.connect(location.href);
 
-  socket.on("push_image", function(data) {
+  socket.on("update", function(data) {
     window.fireEvent("show_name", data);
   });
 

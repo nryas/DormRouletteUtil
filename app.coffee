@@ -15,13 +15,15 @@ app.get "/", (req, res) ->
 app.post "/", (req, res) ->
   form = new multiparty.Form()
   form.parse req, (err, fieldsObject, filesObject, fieldsList, filesList) ->
-    img = filesObject
-    path = img['uploaded'][0].path
-    fs.readFile path, (err, buf) ->
-      if err?
-        res.status(422)
-        return
-      data = buf.toString("base64")
-      io.sockets.emit "push_image", {dataUrl: util.format("data:%s;base64,%s", mime.lookup(path), data)}
-      res.end()
+    name = fieldsObject
+    io.sockets.emit "update", name[0]
+    # img = filesObject
+    # path = img['uploaded'][0].path
+    # fs.readFile path, (err, buf) ->
+      # if err?
+        # res.status(422)
+        # return
+      # data = buf.toString("base64")
+      # io.sockets.emit "push_image", {dataUrl: util.format("data:%s;base64,%s", mime.lookup(path), data)}
+      # res.end()
 server.listen(process.env.PORT)
