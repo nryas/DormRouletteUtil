@@ -29,13 +29,7 @@
   });
 
   app.post("/", function(req, res) {
-    var form;
-    form = new multiparty.Form();
-    return form.parse(req, function(err, fieldsObject, filesObject, fieldsList, filesList) {
-      var name;
-      name = fieldsObject;
-      return io.sockets.emit("update", name[0]);
-    });
+    return io.sockets.emit("update", req.body);
   });
 
   server.listen(process.env.PORT);

@@ -13,10 +13,9 @@ app.get "/", (req, res) ->
   res.render "index.jade", {title: "My Site"}
 
 app.post "/", (req, res) ->
-  form = new multiparty.Form()
-  form.parse req, (err, fieldsObject, filesObject, fieldsList, filesList) ->
-    name = fieldsObject
-    io.sockets.emit "update", name[0]
+  io.sockets.emit "update", req.body
+  # form = new multiparty.Form()
+  # form.parse req, (err, fieldsObject, filesObject, fieldsList, filesList) ->
     # img = filesObject
     # path = img['uploaded'][0].path
     # fs.readFile path, (err, buf) ->
