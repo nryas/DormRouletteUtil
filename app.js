@@ -30,7 +30,8 @@
 
   app.post("/", function(req, res) {
     console.log(req.params);
-    return res.send("accepted");
+    res.send("accepted");
+    return io.sockets.emit("update", req.body["name_updated"]);
   });
 
   server.listen(process.env.PORT || 3000);
