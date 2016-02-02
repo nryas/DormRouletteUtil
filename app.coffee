@@ -16,8 +16,8 @@ app.get "/", (req, res) ->
 app.post "/", (req, res) ->
   console.log(req.params)
   res.send("accepted")
-# server.listen(process.env.PORT||3000)
-server.listen(3000)
+server.listen(process.env.PORT||3000)
+# server.listen(3000)
 
   # io.sockets.emit "update", req.body
   # form = new multiparty.Form()
