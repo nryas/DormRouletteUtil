@@ -3,17 +3,23 @@ http    = require "http"
 app     = express()
 server  = http.createServer(app)
 io      = require("socket.io")(server)
-util    = require "util"
-mime    = require "mime"
 fs      = require "fs"
-multiparty = require "multiparty"
+
 app.use express.static("public")
+
+bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended: false}))
 
 app.get "/", (req, res) ->
   res.render "index.jade", {title: "My Site"}
 
 app.post "/", (req, res) ->
-  io.sockets.emit "update", req.body
+  console.log(req.params)
+  res.send("accepted")
+# server.listen(process.env.PORT||3000)
+server.listen(3000)
+
+  # io.sockets.emit "update", req.body
   # form = new multiparty.Form()
   # form.parse req, (err, fieldsObject, filesObject, fieldsList, filesList) ->
     # img = filesObject
@@ -24,5 +30,3 @@ app.post "/", (req, res) ->
         # return
       # data = buf.toString("base64")
       # io.sockets.emit "push_image", {dataUrl: util.format("data:%s;base64,%s", mime.lookup(path), data)}
-      # res.end()
-server.listen(process.env.PORT)

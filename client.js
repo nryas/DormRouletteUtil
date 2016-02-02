@@ -5,7 +5,9 @@
   socket = io.connect(location.href);
 
   socket.on("update", function(data) {
-    window.fireEvent("show_name", data);
+    var eve;
+    eve = new Event("show_name");
+    window.dispatchEvent(eve);
   });
 
 }).call(this);
